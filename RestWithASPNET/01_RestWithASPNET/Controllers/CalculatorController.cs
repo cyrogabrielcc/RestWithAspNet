@@ -37,7 +37,18 @@ namespace _01_RestWithASPNET.Controllers
         {
             if (isNumeric(f1) && isNumeric(f2))
             {
-                var sum = convertToDouble(f1) - convertToDouble(f2);
+                var sum = convertToDouble(f1) / convertToDouble(f2);
+                return Ok(sum.ToString());
+            }
+            return BadRequest("input inválido");
+        }
+
+         [HttpGet("mult/{firstNumber}/{secondNumber}")]
+        public IActionResult GetMultiplicacao(string f1, string f2)
+        {
+            if (isNumeric(f1) && isNumeric(f2))
+            {
+                var sum = convertToDouble(f1) / convertToDouble(f2);
                 return Ok(sum.ToString());
             }
             return BadRequest("input inválido");
