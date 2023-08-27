@@ -1,4 +1,4 @@
-namespace RestWithAspNet;
+namespace _01_RestWithAspNet;
 
 public class WeatherForecast
 {
