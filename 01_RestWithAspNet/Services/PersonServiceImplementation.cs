@@ -26,23 +26,23 @@ namespace _01_RestWithAspNet.Services
         {
             List<Person> persons = new List<Person>();
             
-            foreach (var item in persons)
+            for (int i =0; i <= 8; i++)
             {
-                Person person = MockPerson(item);
+                Person person = MockPerson(i);
                 persons.Add(person);
             };
 
             return persons;
         }
 
-        private Person MockPerson(object i)
+        private Person MockPerson(int i)
         {
             return new Person
             {
                 Id = IncrementAndGet(),
-                FirstName = "Cyro",
-                LastName = "Cunha",
-                Address = "Rua dos bobos, 012",
+                FirstName = "First Name" + i,
+                LastName = "Last Name" + i,
+                Address = "Some Address" + i,
                 Gender = "M"
             };
         }
