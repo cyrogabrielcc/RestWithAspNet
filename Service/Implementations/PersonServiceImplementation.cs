@@ -20,17 +20,44 @@ namespace RestWithAspNet.Service.Implementations
 
         List<Person> IPersonService.FindAll()
         {
-            throw new NotImplementedException();
+            List<Person> persons = new List<Person>();
+            for(int i = 0; i < 8; i++)
+            {
+                Person person = mockPerson(i);
+                persons.Add(person);
+            }
+            return persons;
         }
+
+       
 
         Person IPersonService.FindById(long id)
         {
-            throw new NotImplementedException();
+            return new Person
+            {
+                Id= 1,
+                FirstName= "",
+                LastName= "",
+                Address= "",
+                Gender= "M"
+            };
         }
 
         Person IPersonService.Update(Person person)
         {
-            throw new NotImplementedException();
+            return person;
+        } 
+        
+        private Person mockPerson(int i)
+        {
+            return new Person
+            {
+                Id = 1,
+                FirstName = "",
+                LastName = "",
+                Address = "",
+                Gender = "M"
+            }; ;
         }
     }
 }
