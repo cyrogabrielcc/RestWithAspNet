@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using RestWithAspNet.model;
 
@@ -8,6 +9,7 @@ namespace RestWithAspNet.Service.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
+        private volatile int count;
         Person IPersonService.Create(Person person)
         {
             throw new NotImplementedException();
@@ -35,7 +37,7 @@ namespace RestWithAspNet.Service.Implementations
         {
             return new Person
             {
-                Id= 1,
+                Id= IncrementAndGet(),
                 FirstName= "",
                 LastName= "",
                 Address= "",
@@ -43,7 +45,7 @@ namespace RestWithAspNet.Service.Implementations
             };
         }
 
-        Person IPersonService.Update(Person person)
+         Person IPersonService.Update(Person person)
         {
             return person;
         } 
@@ -58,6 +60,10 @@ namespace RestWithAspNet.Service.Implementations
                 Address = "",
                 Gender = "M"
             }; ;
+        }
+        private long IncrementAndGet()
+        {
+            return Interlocked.Increment(ref count);
         }
     }
 }
