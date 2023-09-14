@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace RestWithAspNet.context
 {
     public class SQLContext : DbContext
     {
-       p 
+
+        public SQLContext(){}
+        public SQLContext(DbContextOptions<SQLContext> options) : base(options){}
+
+
     }
 }
