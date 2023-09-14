@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RestWithAspNet.context;
 using RestWithAspNet.Service;
 using RestWithAspNet.Service.Implementations;
 
@@ -23,6 +25,9 @@ namespace RestWithAspNet
         {
 
             services.AddControllers();
+
+            var connection = Configuration["ConnectionStrings:ConexaoPadrao"];
+            services.AddDbContext<SQLContext>(options=>options.UseSqlServer(connection));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithAspNet", Version = "v1" });
