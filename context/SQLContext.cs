@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RestWithAspNet.model;
 
 namespace RestWithAspNet.context
 {
@@ -8,6 +9,7 @@ namespace RestWithAspNet.context
         public SQLContext(){}
         public SQLContext(DbContextOptions<SQLContext> options) : base(options){}
 
-
+        public DbSet<Person> Persons {get; set;}
+        
     }
 }
