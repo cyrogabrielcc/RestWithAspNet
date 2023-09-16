@@ -43,24 +43,23 @@ namespace RestWithAspNet.Service.Implementations
 
         Person IPersonService.FindById(long id)
         {
-            return new Person
-            {
-                Id= 1,
-                FirstName= "",
-                LastName= "",
-                Address= "",
-                Gender= "M"
-            };
+            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
         }
 
          Person IPersonService.Update(Person person)
         {
-            return person;
-        } 
-        
-        private long IncrementAndGet(long id)
+            if (!Exists(person.Id))
+            {
+                
+            }
+
+
+
+        }
+
+        private bool Exists(long id)
         {
-            return id;
+            return _context.Persons.Any(p => p.Equals(id));
         }
     }
 }
