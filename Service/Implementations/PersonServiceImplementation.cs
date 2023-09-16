@@ -2,17 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using RestWithAspNet.context;
 using RestWithAspNet.model;
 
 namespace RestWithAspNet.Service.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private volatile int count;
+        private SQLContext _context;
+        
+        public PersonServiceImplementation(SQLContext context)
+        {
+            _context = context;
+        }
+
         Person IPersonService.Create(Person person)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Add(person);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return person;
         }
 
         void IPersonService.Delete(long id)
@@ -22,22 +38,14 @@ namespace RestWithAspNet.Service.Implementations
 
         List<Person> IPersonService.FindAll()
         {
-            List<Person> persons = new List<Person>();
-            for(int i = 0; i < 8; i++)
-            {
-                Person person = mockPerson(i);
-                persons.Add(person);
-            }
-            return persons;
+           return _context.Persons.ToList();
         }
-
-       
 
         Person IPersonService.FindById(long id)
         {
             return new Person
             {
-                Id= IncrementAndGet(),
+                Id= 1,
                 FirstName= "",
                 LastName= "",
                 Address= "",
@@ -50,20 +58,9 @@ namespace RestWithAspNet.Service.Implementations
             return person;
         } 
         
-        private Person mockPerson(int i)
+        private long IncrementAndGet(long id)
         {
-            return new Person
-            {
-                Id = 1,
-                FirstName = "" + i,
-                LastName = "" + i,
-                Address = "" + i,
-                Gender = "Male"
-            }; ;
-        }
-        private long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
+            return id;
         }
     }
 }
