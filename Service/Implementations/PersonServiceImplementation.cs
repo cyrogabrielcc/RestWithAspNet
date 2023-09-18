@@ -48,12 +48,24 @@ namespace RestWithAspNet.Service.Implementations
 
          Person IPersonService.Update(Person person)
         {
-            if (!Exists(person.Id))
+            if (!Exists(person.Id)) return null;
+
+            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
+
+            if (result != null) 
             {
-                
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.SaveChanges();
+                }
+                catch (System.Exception)
+                {
+                    
+                    throw;
+                }
             }
-
-
+            return person;
 
         }
 
