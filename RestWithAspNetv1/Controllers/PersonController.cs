@@ -6,6 +6,7 @@ using RestWithAspNet.Service;
 
 namespace RestWithAspNet.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
     [Route("[controller]")]
     public class PersonController  : ControllerBase

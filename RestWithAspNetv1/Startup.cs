@@ -32,6 +32,10 @@ namespace RestWithAspNet
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithAspNet", Version = "v1" });
             });
+            
+            //Versioning 
+            services.AddApiVersioning();
+
             services.AddScoped<IPersonService, PersonServiceImplementation>();
         }
 
