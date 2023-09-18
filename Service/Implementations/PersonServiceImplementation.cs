@@ -20,7 +20,8 @@ namespace RestWithAspNet.Service.Implementations
             return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
         }
 
-            List<Person> IPersonService.FindAll()
+        
+        List<Person> IPersonService.FindAll()
         {
         
         return _context.Persons.ToList();
