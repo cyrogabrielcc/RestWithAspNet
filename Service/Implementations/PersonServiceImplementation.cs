@@ -33,7 +33,21 @@ namespace RestWithAspNet.Service.Implementations
 
         void IPersonService.Delete(long id)
         {
-            
+             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+
+            if (result != null) 
+            {
+                try
+                {
+                    _context.Persons.Remove(result);
+                    _context.SaveChanges();
+                }
+                catch (System.Exception)
+                {
+                    
+                    throw;
+                }
+            }
         }
 
         List<Person> IPersonService.FindAll()
