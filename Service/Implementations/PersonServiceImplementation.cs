@@ -15,6 +15,17 @@ namespace RestWithAspNet.Service.Implementations
         {
             _context = context;
         }
+        Person IPersonService.FindById(long id)
+        {
+            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+        }
+
+            List<Person> IPersonService.FindAll()
+        {
+        
+        return _context.Persons.ToList();
+        }
+
 
         Person IPersonService.Create(Person person)
         {
@@ -49,16 +60,7 @@ namespace RestWithAspNet.Service.Implementations
                 }
             }
         }
-
-        List<Person> IPersonService.FindAll()
-        {
-           return _context.Persons.ToList();
-        }
-
-        Person IPersonService.FindById(long id)
-        {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
-        }
+   
 
          Person IPersonService.Update(Person person)
         {
