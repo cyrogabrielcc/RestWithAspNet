@@ -7,28 +7,28 @@ using RestWithAspNet.model;
 
 namespace RestWithAspNet.Business.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonBusinessImplementation : IPersonBusiness
     {
         private SQLContext _context;
         
-        public PersonServiceImplementation(SQLContext context)
+        public PersonBusinessImplementation(SQLContext context)
         {
             _context = context;
         }
-        Person IPersonService.FindById(long id)
+        Person IPersonBusiness.FindById(long id)
         {
             return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
         }
 
         
-        List<Person> IPersonService.FindAll()
+        List<Person> IPersonBusiness.FindAll()
         {
         
         return _context.Persons.ToList();
         }
 
 
-        Person IPersonService.Create(Person person)
+        Person IPersonBusiness.Create(Person person)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace RestWithAspNet.Business.Implementations
             return person;
         }
 
-        void IPersonService.Delete(long id)
+        void IPersonBusiness.Delete(long id)
         {
              var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
 
@@ -63,7 +63,7 @@ namespace RestWithAspNet.Business.Implementations
         }
    
 
-         Person IPersonService.Update(Person person)
+         Person IPersonBusiness.Update(Person person)
         {
             if (!Exists(person.Id)) return null;
 

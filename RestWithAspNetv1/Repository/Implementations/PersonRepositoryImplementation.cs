@@ -11,24 +11,24 @@ namespace RestWithAspNet.Repository.Implementations
     {
         private SQLContext _context;
         
-        public PersonServiceImplementation(SQLContext context)
+        public PersonRepositoryImplementation(SQLContext context)
         {
             _context = context;
         }
-        Person IPersonService.FindById(long id)
+        Person IPersonRepository.FindById(long id)
         {
             return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
         }
 
         
-        List<Person> IPersonService.FindAll()
+        List<Person> IPersonRepository.FindAll()
         {
         
         return _context.Persons.ToList();
         }
 
 
-        Person IPersonService.Create(Person person)
+        Person IPersonRepository.Create(Person person)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace RestWithAspNet.Repository.Implementations
             return person;
         }
 
-        void IPersonService.Delete(long id)
+        void IPersonRepository.Delete(long id)
         {
              var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
 
@@ -63,7 +63,7 @@ namespace RestWithAspNet.Repository.Implementations
         }
    
 
-         Person IPersonService.Update(Person person)
+         Person IPersonRepository.Update(Person person)
         {
             if (!Exists(person.Id)) return null;
 
