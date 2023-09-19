@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestWithAspNet.model;
 
-namespace RestWithAspNet.Business
+namespace RestWithAspNet.Repository
 {
-    public interface IPersonService
+    public interface IPersonRepository
     {
         Person Create(Person person);
         Person FindById(long id);

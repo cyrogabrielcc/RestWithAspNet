@@ -5,9 +5,9 @@ using System.Threading;
 using RestWithAspNet.context;
 using RestWithAspNet.model;
 
-namespace RestWithAspNet.Business.Implementations
+namespace RestWithAspNet.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         private SQLContext _context;
         
