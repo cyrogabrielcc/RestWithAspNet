@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestWithAspNet.context;
-using RestWithAspNet.Service;
-using RestWithAspNet.Service.Implementations;
+using RestWithAspNet.Business;
+using RestWithAspNet.Business.Implementations;
 
 namespace RestWithAspNet
 {
