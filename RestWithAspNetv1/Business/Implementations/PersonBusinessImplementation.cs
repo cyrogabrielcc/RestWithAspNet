@@ -1,93 +1,49 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using RestWithAspNet.context;
 using RestWithAspNet.model;
+using RestWithAspNet.Repository;
 
 namespace RestWithAspNet.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
-        private SQLContext _context;
+        private readonly IPersonRepository _repository;
         
-        public PersonBusinessImplementation(SQLContext context)
+        public PersonBusinessImplementation(IPersonRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
         Person IPersonBusiness.FindById(long id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            return _repository.FindById(id);
         }
 
         
         List<Person> IPersonBusiness.FindAll()
         {
         
-        return _context.Persons.ToList();
+        return _repository.FindAll();
         }
 
 
         Person IPersonBusiness.Create(Person person)
         {
-            try
-            {
-                _context.Add(person);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return person;
+            return _repository.Create(person);
         }
 
         void IPersonBusiness.Delete(long id)
         {
-             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
-
-            if (result != null) 
-            {
-                try
-                {
-                    _context.Persons.Remove(result);
-                    _context.SaveChanges();
-                }
-                catch (System.Exception)
-                {
-                    
-                    throw;
-                }
-            }
+              _repository.Delete(id);
+            
         }
    
 
          Person IPersonBusiness.Update(Person person)
         {
-            if (!Exists(person.Id)) return null;
-
-            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
-
-            if (result != null) 
-            {
-                try
-                {
-                    _context.Entry(result).CurrentValues.SetValues(person);
-                    _context.SaveChanges();
-                }
-                catch (System.Exception)
-                {
-                    
-                    throw;
-                }
-            }
-            return person;
+           return _repository.Update(person);
         }
 
-        private bool Exists(long id)
-        {
-            return _context.Persons.Any(p => p.Equals(id));
-        }
     }
 }
