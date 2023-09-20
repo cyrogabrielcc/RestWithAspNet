@@ -85,7 +85,7 @@ namespace RestWithAspNet.Repository.Implementations
             return person;
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Equals(id));
         }
