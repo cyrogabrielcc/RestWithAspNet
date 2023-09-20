@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using RestWithAspNet.context;
 using RestWithAspNet.Business;
 using RestWithAspNet.Business.Implementations;
+using RestWithAspNet.Repository;
+using RestWithAspNet.Repository.Implementations;
 
 namespace RestWithAspNet
 {
@@ -37,6 +39,7 @@ namespace RestWithAspNet
             services.AddApiVersioning();
 
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
